@@ -50,33 +50,12 @@ def partition(mas, low, high):
     return i-1
 
 
-def divide(self, unsorted, lower, upper):
-    if upper <= lower:
-        return
-    mid = (lower + upper) // 2
-    # делим массив посередине
-    divide(unsorted, lower, mid)
-    divide(unsorted, mid + 1, upper)
-    merge(unsorted, lower, mid, mid + 1, upper)
-
-
-def merge(unsorted, l_lower, l_upper, r_lower, r_upper):
-    i, j = l_lower, r_lower
-    temp = []
-    while i <= l_upper and j <= r_upper:
-        if unsorted[i].value <= unsorted[j].value:
-            temp.append(unsorted[i])
-            i += 1
+def gnom_sort(mas):
+    i = 1
+    while i < len(mas):
+        if mas[i] < mas[i-1]:
+            mas[i], mas[i-1] = mas[i-1], mas[i]
+            i = i-1 if i > 1 else i+1
         else:
-            temp.append(unsorted[j])
-            j += 1
-
-    while i <= l_upper:
-        temp.append(unsorted[i])
-        i += 1
-    while j <= r_upper:
-        temp.append(unsorted[j])
-        j += 1
-
-    for y, k in enumerate(range(l_lower, r_upper + 1)):
-        unsorted[k] = temp[y]
+            i += 1
+    return mas
